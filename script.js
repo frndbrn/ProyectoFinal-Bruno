@@ -170,18 +170,16 @@ function agregarAlCarrito(productos, id, carrito) {
       subtotal: productoBuscado.precio,
       imagen: productoBuscado.rutaImagen
     })
+    mostrarMensaje("Producto agregado al carrito!", "green")
   } else { // si no es -1, significa que ya se agregó previamente
     let stockActual = productoBuscado.stock
-    let botonNoStock = document.getElementById(`agregar-${id}`)
     console.log(stockActual)
     if (stockActual > carrito[posicion].unidades) { // chequeo de que haya stock disponible antes de agregar otra unidad al carrito
-      botonNoStock.innerText = "Agregar al carrito"
-      botonNoStock.className = botonNoStock.className.replace("fueraDeStock", "")
       carrito[posicion].unidades++
       carrito[posicion].subtotal = carrito[posicion].precio * carrito[posicion].unidades
+      mostrarMensaje("Producto agregado al carrito!", "green")
     } else { // en caso de pasarse, cambio el boton de agregar a "fuera de stock" y no sumo más al carrito
-      botonNoStock.innerText = "No hay stock"
-      botonNoStock.classList.add("fueraDeStock")
+      mostrarMensaje("No se puede agregar más de ese producto!", "red")
       console.log("No se puede agregar mas")
     }
   }
@@ -190,11 +188,6 @@ function agregarAlCarrito(productos, id, carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito))
 
 }
-
-
-// Aclaración: para esta 3er preentrega, cambio los botones de "agregar a carrito" a "fuera de stock".
-// Mi idea para la entrega final, es quitar esa función y reemplazarla
-// por una notificación toast usando una libreria.
 
 
 
@@ -240,6 +233,7 @@ function borrarProducto(carrito, id) {
     carrito.splice(productoAEliminar, 1)
   }
   localStorage.setItem("carrito", JSON.stringify(carrito))
+  mostrarMensaje("Producto eliminado del carrito!", "#5E97F9")
   renderizarCarrito(carrito)
 }
 
@@ -252,11 +246,14 @@ function finalizarCompra(carrito) {
     carritoFisico.innerHTML = ""
     localStorage.removeItem("carrito")
     carrito.splice(0, carrito.length)
-    mensajeDiv.innerHTML = "<h2> Gracias por comprar, vuelva pronto!</h2>"
-    mensajeDiv.style.display = "block" // muestro el mensaje y después lo oculto
-    setTimeout(function () {
-      mensajeDiv.style.display = "none"
-    }, 2000)
+    Swal.fire({
+      title: 'Compra Finalizada!',
+      text: 'Muchas gracias por comprar, vuelva pronto!',
+      imageUrl: './img/final.png',
+      imageWidth: 300,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
   } else { // en caso de que se presione y el carrito esta vacio
     mensajeDiv.innerHTML = "<h2> Todavia no compraste nada! Agregá algo al carrito primero :D </h2>"
     mensajeDiv.style.display = "block"
@@ -267,3 +264,14 @@ function finalizarCompra(carrito) {
   renderizarCarrito(carrito)
 }
 
+// FUNCIONES DE LIBRERIAS
+
+// TOASTIFY
+
+function mostrarMensaje(mensaje, color) {
+  Toastify({
+    text: mensaje,
+    backgroundColor: color,
+    duration: 3000
+  }).showToast();
+}
