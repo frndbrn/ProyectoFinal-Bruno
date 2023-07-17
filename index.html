@@ -1,0 +1,57 @@
+<!--Código creado por Fernando Bruno - Comisión 52235-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--link de mi archivo css-->
+  <link rel="stylesheet" href="./style.css">
+  <title>Preentrega3 - Bruno</title>
+</head>
+
+<body>
+  <header id="arriba"> <!--sección con el logo, el input, los botones prehechos y los filtros creados en javascript-->
+    <h1><img src="./img/coderlimpio.png" alt="Coder Records"></h1>
+    <input id="buscador" placeholder="Ingrese nombre o categoria de producto">
+    <div class="menu">
+      <button id="botonCarrito" class="botones">Carrito</button>
+      <button id="precioMenorMayor" class="botones">Ordenar menor a mayor</button>
+      <button id="precioMayorMenor" class="botones">Ordenar mayor a menor</button>
+      <div id="filtros"></div>
+    </div>
+  </header>
+
+  <main id="cuerpo">
+    <!--presentación de tarjetas de compra y del carrito, dependiendo del caso, una se muestra y la otra se oculta -->
+    <div class="principal">
+      <div id="productos"></div>
+      <div id="seccionCarrito" class="oculto">
+        <h2>Mi Carrito</h2>
+        <div class="descripcion"> <!-- espacio para ordenar mi lista del carrito -->
+          <span>Imagen</span>
+          <span>Nombre del producto</span>
+          <span>Unidades</span>
+          <span>Subtotal</span>
+          <span></span> <!--Espacio para el botón de eliminar-->
+        </div>
+        <div id="carrito"></div>
+        <div id="mostrarPrecioFinal"></div>
+        <button id="finalizarCompra" class="botones">FINALIZAR COMPRA</button>
+        <div id="mensajeFinal"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <h3>Todos los derechos reservados.</h3>
+    <div>
+      <p><a href="#arriba">Ir para arriba</a></p> <!-- link interno para volver arriba de todo de mi página-->
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>

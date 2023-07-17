@@ -1,0 +1,169 @@
+/* Código creado por Fernando Bruno - Comisión 52235 */
+
+
+/* reseteo general de estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* estilos para el header */
+
+#arriba {
+  background-color: rgba(242, 204, 122, 1);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: normal;
+}
+
+h1 img {
+  width: 500px;
+  height: auto;
+}
+
+
+.menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#buscador {
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* estilos para los botones  */
+
+
+.botones {
+  background-color: rgb(86, 172, 201);
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.botones:hover {
+  background-color: rgb(240, 183, 150);
+}
+
+.fueraDeStock {
+  background-color: red;
+}
+
+/* estilos para el main - sección productos */
+
+
+#productos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.tarjetaProducto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 4px solid rgb(150, 150, 150);
+  border-radius: 10px;
+  margin: 15px;
+  background-color: #ffecd0;
+  transition: transform 0.3s;
+}
+
+/* animación de las tarjetas */
+
+.agrandado {
+  transform: scale(1.2);
+}
+
+.imagen {
+  width: 270px;
+  height: 200px;
+}
+
+#cuerpo {
+  background: rgb(251, 246, 246);
+  background: linear-gradient(0deg, rgba(251, 246, 246, 1) 0%, rgba(242, 204, 122, 1) 76%);
+  display: grid;
+  grid-template-columns: 0.3fr 2.4fr 0.3fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". principal ."
+    ". principal .";
+  min-height: 100vh;
+}
+
+.principal {
+  background: rgb(251, 246, 246);
+  background: linear-gradient(0deg, rgba(251, 246, 246, 1) 0%, rgba(242, 204, 122, 1) 76%);
+  grid-area: principal;
+}
+
+/* estilos para el carrito */
+
+
+#carrito,
+.descripcion {
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "foto nombre unidades subtotal boton";
+}
+
+.foto {
+  grid-area: foto;
+}
+
+.nombre {
+  grid-area: nombre;
+}
+
+.unidades {
+  grid-area: unidades;
+}
+
+.subtotal {
+  grid-area: subtotal;
+}
+
+.boton {
+  grid-area: boton;
+}
+
+.oculto {
+  display: none !important;
+}
+
+.imagenCarrito {
+  height: 50px;
+  width: 80px;
+}
+
+#carrito h2 {
+  margin: 10px;
+  text-align: center;
+  text-decoration: solid;
+}
+
+/* estilos para el footer */
+
+
+footer {
+  background-color: #F1C27B;
+}
