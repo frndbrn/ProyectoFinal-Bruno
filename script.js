@@ -18,17 +18,18 @@ function arranque() {
       { id: 29, nombre: "Off The Wall", artista: "Michael Jackson", categoria: "pop", stock: 7, precio: 13500, rutaImagen: "jackson.png" },
     ] */
 
-  let productosJSON = './stock.json'
   let productos = []
 
-  fetch(productosJSON)
+  fetch('stock.json')
     .then(response => response.json())
     .then(data => {
       productos = data.productos
     })
     .catch(error => {
       console.log('Error:', error);
-    });
+    })
+
+    console.log(productos)
 
 
   // si hay algo en la memoria local previamente, lo guardo en carritoJSON
