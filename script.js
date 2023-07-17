@@ -3,7 +3,7 @@
 // Función principal del programa, con mi lista y la creación de las tarjetas y carrito
 async function obtenerStock (){
   try{
-    let response = await fetch('http://localhost:5500/stock.json')
+    let response = await fetch('./stock.json')
     let data =  await response.json()
     console.log(data)
     arranque(data)
