@@ -1,11 +1,24 @@
 // Código creado por Fernando Bruno - Comisión 52235
 
 // Función principal del programa, con mi lista y la creación de las tarjetas y carrito
+async function obtenerStock (){
+  try{
+    let response = await fetch('http://localhost:5500/stock.json')
+    let data =  await response.json()
+    console.log(data)
+    arranque(data)
+}
+catch(err){
+    console.log('Sucedio un error en la consulta')
+}
+}
 
-function arranque() {
+obtenerStock()
+
+function arranque(productos) {
 
   //array de productos en mi página
-  /*   let productos = [
+/*     let productos = [
       { id: 2, nombre: "Revolver", artista: "The Beatles", categoria: "rock", stock: 2, precio: 15000, rutaImagen: "beatles.png" },
       { id: 5, nombre: "Low", artista: "David Bowie", categoria: "rock", stock: 7, precio: 12650, rutaImagen: "bowie.png" },
       { id: 7, nombre: "Discovery", artista: "Daft Punk", categoria: "electronica", stock: 4, precio: 14500, rutaImagen: "daftpunk.png" },
@@ -18,9 +31,9 @@ function arranque() {
       { id: 29, nombre: "Off The Wall", artista: "Michael Jackson", categoria: "pop", stock: 7, precio: 13500, rutaImagen: "jackson.png" },
     ] */
 
-  let productos = []
+/*   let productos = []
 
-  fetch('stock.json')
+  fetch('http://localhost:5500/stock.json')
     .then(response => response.json())
     .then(data => {
       productos = data.productos
@@ -30,7 +43,8 @@ function arranque() {
     })
 
     console.log(productos)
-
+ */
+    console.log(productos)
 
   // si hay algo en la memoria local previamente, lo guardo en carritoJSON
   let carritoJSON = JSON.parse(localStorage.getItem("carrito"))
@@ -167,7 +181,14 @@ function mostrarOcultar() {
   let carritoLista = document.getElementById("seccionCarrito")
   vistaProductos.classList.toggle("oculto")// toggle cambia como un switch 
   carritoLista.classList.toggle("oculto")// toggle cambia como un switch 
+  cambiarMensaje()
+}
 
+function cambiarMensaje(){
+  let botonCarrito = document.getElementById("botonCarrito")
+  let mensajeActual = botonCarrito.innerHTML
+  let nuevoMensaje = mensajeActual === 'Carrito' ? 'Ver productos' : 'Carrito'
+  botonCarrito.innerHTML = nuevoMensaje
 }
 
 // funcion para guardar elementos en mi carrito
@@ -255,7 +276,6 @@ function borrarProducto(carrito, id) {
 
 // si se presiona el boton de finalizar compra
 function finalizarCompra(carrito) {
-  let mensajeDiv = document.getElementById("mensajeFinal")
   if (carrito.length !== 0) { // si el carrito tiene algo, limpio el carrito y lo que esté guardado en el localStorage
     let carritoFisico = document.getElementById("carrito")
     carritoFisico.innerHTML = ""
@@ -270,11 +290,10 @@ function finalizarCompra(carrito) {
       imageAlt: 'Custom image',
     })
   } else { // en caso de que se presione y el carrito esta vacio
-    mensajeDiv.innerHTML = "<h2> Todavia no compraste nada! Agregá algo al carrito primero :D </h2>"
-    mensajeDiv.style.display = "block"
-    setTimeout(function () {
-      mensajeDiv.style.display = "none"
-    }, 3000)
+    Swal.fire({
+      title: 'Apa estamos ansiosos!',
+      text: 'Primero vas a tener que agregar algo al carrito',
+    })
   }
   renderizarCarrito(carrito)
 }

@@ -168,3 +168,11 @@ h1 img {
 footer {
   background-color: #F1C27B;
 }
+
+@media screen and (max-width:1200px){
+  .menu{
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  }
+}
