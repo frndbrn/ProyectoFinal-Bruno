@@ -17,33 +17,6 @@ obtenerStock()
 
 function arranque(productos) {
 
-  //array de productos en mi página
-/*     let productos = [
-      { id: 2, nombre: "Revolver", artista: "The Beatles", categoria: "rock", stock: 2, precio: 15000, rutaImagen: "beatles.png" },
-      { id: 5, nombre: "Low", artista: "David Bowie", categoria: "rock", stock: 7, precio: 12650, rutaImagen: "bowie.png" },
-      { id: 7, nombre: "Discovery", artista: "Daft Punk", categoria: "electronica", stock: 4, precio: 14500, rutaImagen: "daftpunk.png" },
-      { id: 9, nombre: "Ice, Death...", artista: "King Gizzard", categoria: "rock", stock: 1, precio: 18800, rutaImagen: "king.png" },
-      { id: 12, nombre: "Mezzanine", artista: "Massive Attack", categoria: "electronica", stock: 3, precio: 20300, rutaImagen: "massive.png" },
-      { id: 15, nombre: "In Rainbows", artista: "Radiohead", categoria: "rock", stock: 8, precio: 15600, rutaImagen: "radiohead.png" },
-      { id: 17, nombre: "Kind Of Blue", artista: "Miles Davis", categoria: "jazz", stock: 3, precio: 12500, rutaImagen: "davis.png" },
-      { id: 20, nombre: "Gold", artista: "Abba", categoria: "pop", stock: 12, precio: 24000, rutaImagen: "abba.png" },
-      { id: 25, nombre: "Trio 65", artista: "Bill Evans", categoria: "jazz", stock: 6, precio: 17800, rutaImagen: "evans.png" },
-      { id: 29, nombre: "Off The Wall", artista: "Michael Jackson", categoria: "pop", stock: 7, precio: 13500, rutaImagen: "jackson.png" },
-    ] */
-
-/*   let productos = []
-
-  fetch('http://localhost:5500/stock.json')
-    .then(response => response.json())
-    .then(data => {
-      productos = data.productos
-    })
-    .catch(error => {
-      console.log('Error:', error);
-    })
-
-    console.log(productos)
- */
     console.log(productos)
 
   // si hay algo en la memoria local previamente, lo guardo en carritoJSON
@@ -131,11 +104,17 @@ function crearFiltros(arrayDeElementos, contenedorFiltros, carrito) {
   })
 
   filtros.forEach(filtro => { // para cada filtro encontrado en mi array creo un nuevo botón
-    let boton = document.createElement("button")
+    /* let boton = document.createElement("button")
     boton.id = filtro
-    boton.className = "botones"
-    boton.innerText = filtro
-    contenedorFiltros.appendChild(boton)
+    boton.innerText = filtro */
+    var liElemento = document.createElement("li");
+    var aElemento = document.createElement("a");
+    aElemento.className = "dropdown-item";
+    aElemento.id = filtro
+    aElemento.href = '#';
+    aElemento.innerText = filtro
+    liElemento.appendChild(aElemento);
+    contenedorFiltros.appendChild(liElemento)
     let botonCapturado = document.getElementById(filtro)
     console.log(botonCapturado)
     botonCapturado.addEventListener("click", (e) => filtrarPorCategoria(e.target.id, arrayDeElementos, carrito))
