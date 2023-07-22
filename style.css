@@ -21,8 +21,12 @@
   align-content: normal;
 }
 
+h1{
+
+}
+
 h1 img {
-  width: 500px;
+  width: 100px;
   height: auto;
 }
 
@@ -40,6 +44,9 @@ h1 img {
   justify-content: center;
 }
 
+#linkArriba{
+  margin: 0px;
+}
 /* estilos para los botones  */
 
 
