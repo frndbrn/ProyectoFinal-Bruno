@@ -1,23 +1,23 @@
 // Código creado por Fernando Bruno - Comisión 52235
 
-// Función principal del programa, con mi lista y la creación de las tarjetas y carrito
+// Función para utilizar fetch y obtener mi lista de productos desde mi archivo local .json
 async function obtenerStock (){
   try{
     let response = await fetch('./stock.json')
     let data =  await response.json()
-    console.log(data)
-    arranque(data)
+    arranque(data) // una vez obtenida la lista, la envio a la funcion arranque
 }
-catch(err){
+catch(err){ // En caso de que no encuentre la lista o haya un error
     console.log('Sucedio un error en la consulta')
 }
 }
 
-obtenerStock()
+obtenerStock() 
 
+
+// Función principal del programa, con mi lista ya levantada y la creación de las tarjetas y carrito
 function arranque(productos) {
 
-    console.log(productos)
 
   // si hay algo en la memoria local previamente, lo guardo en carritoJSON
   let carritoJSON = JSON.parse(localStorage.getItem("carrito"))
@@ -80,7 +80,6 @@ function crearTarjetas(array, carrito) {
 // filtrar elementos en base al input "buscador"
 function filtrar(elementos, carrito) { // cuando filtro paso todo a minuscula para evitar errores
   let arrayFiltrado = elementos.filter(producto => producto.nombre.toLowerCase().includes(buscador.value.toLowerCase()) || producto.artista.toLowerCase().includes(buscador.value.toLowerCase()))
-  console.log(arrayFiltrado)
   if (arrayFiltrado.length === 0) { // en caso de que no encuentre ninguna coincidencia
     let pantallaError = document.getElementById("productos")
     pantallaError.innerHTML = ""
@@ -116,7 +115,6 @@ function crearFiltros(arrayDeElementos, contenedorFiltros, carrito) {
     liElemento.appendChild(aElemento);
     contenedorFiltros.appendChild(liElemento)
     let botonCapturado = document.getElementById(filtro)
-    console.log(botonCapturado)
     botonCapturado.addEventListener("click", (e) => filtrarPorCategoria(e.target.id, arrayDeElementos, carrito))
   })
 }
@@ -127,7 +125,6 @@ function filtrarPorCategoria(id, productos, carrito) {
     crearTarjetas(productos, carrito)
   } else {
     let elementosFiltrados = productos.filter(producto => producto.categoria === id)
-    console.log(elementosFiltrados)
     crearTarjetas(elementosFiltrados, carrito)
   }
 }
@@ -172,9 +169,7 @@ function cambiarMensaje(){
 
 // funcion para guardar elementos en mi carrito
 function agregarAlCarrito(productos, id, carrito) {
-  console.log(carrito) // busco el id del elemento original
   let productoBuscado = productos.find(producto => producto.id === id)
-  console.log(productoBuscado)
   let posicion = carrito.findIndex(prod => prod.id === productoBuscado.id)
   if (posicion === -1) { // si ve que no hay coincidencia, es que en el carrito no existe
     carrito.push({
@@ -185,20 +180,17 @@ function agregarAlCarrito(productos, id, carrito) {
       subtotal: productoBuscado.precio,
       imagen: productoBuscado.rutaImagen
     })
-    mostrarMensaje("Producto agregado al carrito!", "green")
+    mostrarMensaje("Producto agregado al carrito!", "green") //llamada a la función que utiliza toastify
   } else { // si no es -1, significa que ya se agregó previamente
     let stockActual = productoBuscado.stock
-    console.log(stockActual)
     if (stockActual > carrito[posicion].unidades) { // chequeo de que haya stock disponible antes de agregar otra unidad al carrito
       carrito[posicion].unidades++
       carrito[posicion].subtotal = carrito[posicion].precio * carrito[posicion].unidades
       mostrarMensaje("Producto agregado al carrito!", "green")
     } else { // en caso de pasarse, cambio el boton de agregar a "fuera de stock" y no sumo más al carrito
       mostrarMensaje("No se puede agregar más de ese producto!", "red")
-      console.log("No se puede agregar mas")
     }
   }
-  console.log(posicion)
   renderizarCarrito(carrito)
   localStorage.setItem("carrito", JSON.stringify(carrito))
 
@@ -224,7 +216,6 @@ function renderizarCarrito(carrito) {
     let precioFinal = carrito.reduce((total, producto) => {
       return total + (producto.precio * producto.unidades)
     }, 0)
-    console.log(Number(precioFinal))
     verPrecioFinal.innerHTML = `<h3>El precio final a pagar es de: ${"$" + precioFinal}</h3>`
     let botonesBorrarProducto = document.querySelectorAll("#carrito .botones")
     botonesBorrarProducto.forEach(boton => {
@@ -242,13 +233,12 @@ function renderizarCarrito(carrito) {
 
 // si se clickea el boton de eliminar producto, puedo eliminar ese producto en específico del carrito
 function borrarProducto(carrito, id) {
-  console.log(id)
   let productoAEliminar = carrito.findIndex(producto => producto.id === Number(id))
   if (productoAEliminar !== -1) {
     carrito.splice(productoAEliminar, 1)
   }
   localStorage.setItem("carrito", JSON.stringify(carrito))
-  mostrarMensaje("Producto eliminado del carrito!", "#5E97F9")
+  mostrarMensaje("Producto eliminado del carrito!", "#5E97F9") 
   renderizarCarrito(carrito)
 }
 
@@ -260,7 +250,7 @@ function finalizarCompra(carrito) {
     carritoFisico.innerHTML = ""
     localStorage.removeItem("carrito")
     carrito.splice(0, carrito.length)
-    Swal.fire({
+    Swal.fire({ // codigo utilizando sweetalert2 
       title: 'Compra Finalizada!',
       text: 'Muchas gracias por comprar, vuelva pronto!',
       imageUrl: './img/final.png',
@@ -280,7 +270,7 @@ function finalizarCompra(carrito) {
 // FUNCIONES DE LIBRERIAS
 
 // TOASTIFY
-
+// Recibe el tipo de mensaje y el color para mostrarlo por pantalla por 3 segundos
 function mostrarMensaje(mensaje, color) {
   Toastify({
     text: mensaje,
