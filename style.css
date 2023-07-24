@@ -23,7 +23,7 @@
 
 
 h1 img {
-  width: 100px;
+  width: 400px;
   height: auto;
 }
 
@@ -43,6 +43,46 @@ h1 img {
 
 #linkArriba{
   margin: 0px;
+}
+
+@media (max-width: 1050px){
+  h1 img {
+    content: url("./img/coderfavicon.png"); /* Ruta de la nueva imagen */
+    width: 100px; /* Ancho de la imagen en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 768px) {
+
+  header{
+    position: relative;
+  }
+
+.barraBootstrap {
+  display: flex;
+  text-align: end;
+  justify-content: center;
+  align-items: center;
+  align-content: end;
+}
+
+.navbar-toggler {
+  margin: 10px; 
+  z-index: 1000; 
+}
+
+
+h1 img{
+  position: absolute; 
+  top: -15px; 
+  left: 5px; 
+  z-index: 1000; 
+}
+.d-flex{
+  justify-content: end;
+}
+
+
 }
 /* estilos para los botones  */
 
