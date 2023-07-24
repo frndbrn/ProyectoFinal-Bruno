@@ -45,12 +45,16 @@ h1 img {
   margin: 0px;
 }
 
+/** modificacion del logo de la página  */
+
 @media (max-width: 1050px){
   h1 img {
-    content: url("./img/coderfavicon.png"); /* Ruta de la nueva imagen */
-    width: 100px; /* Ancho de la imagen en pantallas más pequeñas */
+    content: url("./img/coderfavicon.png"); 
+    width: 100px; 
   }
 }
+
+/** modificaciones el el header para pantallas menores a 768px */
 
 @media (max-width: 768px) {
 
